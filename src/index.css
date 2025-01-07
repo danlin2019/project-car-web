@@ -7,8 +7,16 @@
     font-family: 'Nunito Sans Variable', sans-serif;
   }
   h1{
-    @apply text-center bg-indigo-800 text-white;
-    font-size: 100px;
+   @apply text-2xl font-bold
+  }
+}
+
+@layer components{
+  .arrw-btn{
+    @apply bg-black p-[0.625rem] text-[#d9f99d] transition duration-300 hover:opacity-80
+  }
+  .sumit-btn{
+    @apply bg-slate-800 text-[#d9f99d] w-full py-2 rounded transition duration-300 hover:opacity-90
   }
 }
 
@@ -19,4 +27,8 @@
   .isbutton {
     @apply transition duration-300 active:scale-75
   }
+}
+
+.buy-num{
+  @apply font-bold absolute -right-3 -top-6 bg-[#ee2e2e] text-white text-center inline-block  py-[3px] px-[10px] rounded-[99em];
 }

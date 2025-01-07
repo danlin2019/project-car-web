@@ -1,13 +1,35 @@
 import { TbShoppingBag } from "react-icons/tb";
 import NikeLogo from "../assets/nike-logo.svg?react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useState } from "react";
-export function Nav({onClickOpen}) {
-  const ROUTES = ["Home", "About", "Service", "Pricing", "Contact"];
+import { openSindbar } from "../slice/uiSlice";
+import { useDispatch } from "react-redux";
+export function Nav() {
+
+  const dispatch = useDispatch()
+
+  const totalQuantity = useSelector((state => state.cart))
+  const ROUTES = [
+    {
+      name:'Home',
+      links: '',
+    },
+    // {
+    //   name:'About',
+    //   links: 'About',
+    // },
+    {
+      name:'產品列表',
+      links: 'Products',
+    },
+  ];
   const [isMobileMenuShown, setiIsMobileMenuShown] = useState(false);
   return (
-    <nav className="relative z-10 flex flex-wrap items-center justify-between dark:text-white">
+    <nav className="sticky z-10 flex flex-wrap items-center justify-between dark:text-white">
       <a href="">
+        {/* 購物前台 */}
         <NikeLogo className="h-20 w-20" />
       </a>
       <button
@@ -24,24 +46,25 @@ export function Nav({onClickOpen}) {
           {ROUTES.map((route, i) => {
             return (
               <li
-                className={`cursor-pointer rounded px-3 py-2 ${
-                  i === 0
-                    ? "bg-blue-500 text-white lg:bg-transparent lg:text-blue-500"
-                    : "hover:bg-gray-100"
-                } ${(i === 3 || i === 4) && "lg:text-white hover:bg-transparent hover:text-black"}`}
-                key={route}
+                className={`rounded px-3 py-2 lg:text-black hover:bg-transparent hover:text-black`}
+                key={route.name}
               >
-                {route}
+                <Link to={`/${route.links}`}>{route.name}</Link>
+               
               </li>
             );
           })}
         </ul>
       </div>
       {/* Car button */}
-      <div className="fixed bottom-4 left-4 lg:static dark:text-black" onClick={onClickOpen}>
-        <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
-          <TbShoppingBag />
+      <div className="fixed bottom-4 left-4 lg:static dark:text-black" onClick={()=>dispatch(openSindbar())}>
+        <div className="relative">
+          <div className="buy-num">{totalQuantity.items.length}</div>
+          <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
+            <TbShoppingBag />
+          </div>
         </div>
+
       </div>
     </nav>
   );
