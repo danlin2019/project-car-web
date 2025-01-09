@@ -27,12 +27,17 @@ export default {
         fadeIn: {
           "0%" : {opacity :0},
           "100%" : {opacity :1},
+        },
+        skeleton: {
+          "0,100%": {backgroundColor: '#f0f0f0'},
+          "50%" :{backgroundColor: '#e0e0e0'}
         }
       },
       animation:{
         wiggle: "wiggle 1s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
-        fadeIn: "fadeIn 1s ease-in-out"
+        fadeIn: "fadeIn 1s ease-in-out",
+        skeleton:"skeleton 1.2s infinite ease-in-out"
       }
     },
   },

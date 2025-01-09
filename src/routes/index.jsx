@@ -3,6 +3,7 @@ import IndexPage from "../page/Index";
 import ProductPage from "../page/Product";
 import ProductDetail from "../page/ProductDetail";
 import CartDetail from "../page/CartDetail";
+import Form from "../page/form";
 import { createBrowserRouter } from "react-router-dom";
 const routers = [
   {
@@ -24,6 +25,10 @@ const routers = [
       {
         path:'cartdetail',
         element:<CartDetail/>
+      },
+      {
+        path:'formdetail',
+        element:<Form/>
       },
     ]
   }

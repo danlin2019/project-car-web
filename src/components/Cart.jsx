@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeSindbar } from "../slice/uiSlice";
 import { delectCart } from "../slice/cartSlice";
 export function Cart() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const productDetail = useSelector((state) => state?.cart?.items)
   const totalQuantity = useSelector((state) => state?.cart?.totalQuantity)
   const totalMoney = useSelector((state) => state.cart.totalMoney);
@@ -20,19 +20,20 @@ export function Cart() {
       <ul className="space-y-5 h-[calc(100vh-200px)] overflow-y-auto">
         {productDetail.map((products) => {
           return (
-            <li key={products.id} className="group">
+            <li key={products.id} className=" relative group">
               <Link
-                className="flex  group-hover:bg-[#d9f99d] transition duration-300 p-2"
+                className="flex group-hover:bg-[#d9f99d] transition duration-300 p-2"
                 to={`/products/${products.id}`}
+                onClick={() => dispatch(closeSindbar())}
               >
-                <div className="relative w-[100px] h-0 pb-[15.15%] overflow-hidden mr-3">
+                <div className="relative w-[100px] h-0 pb-[66px] overflow-hidden mr-3">
                   <img
                     className=" absolute w-full h-full top-0 object-cover"
                     src={products.imageUrl}
                     alt=""
                   />
                 </div>
-                <div className="relative text-[0.875rem] ">
+                <div className="relative text-xs ">
                   <h2 className="pr-7 group-hover:text-gray-700">
                     {products.title}
                   </h2>
@@ -45,15 +46,15 @@ export function Cart() {
                   </div>
                   {/* 數量 */}
                   <div className="">購買數量 {products.quantity} 雙</div>
-                  {/* 刪除 */}
-                  <div
-                    className="deleteProduct absolute top-1 right-0 cursor-pointer"
-                    onClick={() => delectProduct(products.id)}
-                  >
-                    <FaTrash />
-                  </div>
                 </div>
               </Link>
+              {/* 刪除 */}
+              <div
+                  className="deleteProduct absolute top-2 right-2 cursor-pointer"
+                  onClick={() => delectProduct(products.id)}
+                >
+                <FaTrash />
+              </div>
             </li>
           );
         })}

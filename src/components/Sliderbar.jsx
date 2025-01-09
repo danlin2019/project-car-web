@@ -8,7 +8,7 @@ export function Sliderbar({children}){
   const {isSidebarOpen} = menuState
   return(
     <>
-        <div className={`fixed right-0 top-0 w-full h-full transform transition duration-300 shadow-lg bg-white z-20 lg:w-[35%] md:w-[50%]
+        <div className={`fixed right-0 top-0 w-full h-full transform transition duration-300 shadow-lg bg-white z-20 lg:w-[25%] md:w-[50%]
         ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <button onClick={()=>dispatch(closeSindbar())} className="absolute right-4 top-4 p-2 font-bold">X</button>
           {children}

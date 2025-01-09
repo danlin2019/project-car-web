@@ -1,5 +1,4 @@
 import nike from "../../assets/n1-min.png";
-import { Select } from "../../components/Select";
 
 export function ShoeDetail() {
   return (

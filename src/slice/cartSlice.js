@@ -14,7 +14,8 @@ export const cartSlice = createSlice({
     addToCart (state,action){
       const newItem = action.payload
       const existingItem = state.items.find((item) => item.id === newItem.id)
-      // 如果已經有相同產品在購物車中，更新數量
+
+      // 如果已經有相同產品在購物車中，更新數量不更新商品
       if(existingItem) { 
         existingItem.quantity = newItem.quantity
       }else{
@@ -27,16 +28,11 @@ export const cartSlice = createSlice({
           time: newItem.time,
           title: newItem.title,
           quantity:newItem.quantity,
-          // totalMoney:
         })
       }
-      // 更新總數量
-      console.log('newItem.quantity',newItem.quantity)
+      // 更新總數量 & 總金額
       state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0)
-      // 更新總金額
       state.totalMoney = state.items.reduce((sum, item) => sum + item.price * item.quantity,0)
-      console.log( state.totalMoney)
-      // 將資料存到localstrage
       localStorage.setItem('cart',JSON.stringify(state.items))
     },
 
@@ -45,7 +41,7 @@ export const cartSlice = createSlice({
       const storedCart = JSON.parse(localStorage.getItem('cart')) || []
       state.items = storedCart
 
-      // 更新總數量和總金額
+      // 更新總數量 & 總金額
       state.totalQuantity = storedCart.reduce((sum, item) => sum + item.quantity, 0)
       state.totalMoney = storedCart.reduce((sum, item) => sum + item.price * item.quantity,0)
     },
@@ -54,7 +50,7 @@ export const cartSlice = createSlice({
       console.log(action.payload)
       // 篩選出不符合的項目並重新賦值給 state.items
       state.items = state.items.filter((item) => item.id !== action.payload)
-      
+
       // 更新總數量 & 總金額
       state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0)
       state.totalMoney = state.items.reduce((sum, item) => sum + item.price * item.quantity,0)

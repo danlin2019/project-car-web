@@ -1,7 +1,8 @@
-import axios from "axios"
+
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect,useState } from "react"
 import { delectCart,selectCartNum } from "../slice/cartSlice";
+import Skeleton from "react-loading-skeleton";
 import { Link,useNavigate } from "react-router-dom";
 
 
@@ -23,19 +24,17 @@ const CartDetail = () =>{
     }))
   }
 
-
   useEffect(()=>{
     if(isLoading){
       setIsLoading(false)
     }else if(productDetail?.length === 0){
-      setIsDefault('無商品')
-      console.log(productDetail?.length)
+      setIsDefault('你的購物車中沒有任何商品')
       setTimeout(()=> navigate('/') , 2000)
     }
   },[productDetail,isLoading])
 
   return(
-    <div className="animate-fadeIn mt-16 m-auto w-[90%] max-w-[992px]">
+    <div className="content-box">
       <div >
         <h2 className="text-2xl font-bold">購物明細</h2>
         <ul className="space-y-5">
@@ -53,7 +52,7 @@ const CartDetail = () =>{
                     />
                   </div>
                   {/* title  */}
-                  <div className="relative text-[0.875rem] ">
+                  <div className="relative text-xs">
                     <h2 className="pr-7 group-hover:text-gray-700">{products.title}</h2>
                     {/* 價格 */}
                     <div className="flex items-center mb-1">
@@ -70,7 +69,7 @@ const CartDetail = () =>{
                  {/* select */}
                  <div className="absolute bottom-5 right-2 w-[150px] "> 
                   <div >
-                    <h3 className="text-[0.875rem] mb-1">更改項目</h3>
+                    <h3 className="text-xs mb-1">更改項目</h3>
                       <select name="" id="" 
                         className="w-full border border-gray-200 rounded p-[6px] bg-white"
                         onChange={(e)=> updateCartItem(e.target.value,products)}
@@ -101,7 +100,7 @@ const CartDetail = () =>{
           </div>
          
 
-          <Link  to='/cartdetail' onClick={()=> dispatch(closeSindbar())} className="text-center mt-2 block w-full bg-black text-white p-3 rounded lg:w-40 transition duration-300 hover:bg-[#78b605]">        
+          <Link  to='/formDetail' onClick={()=> dispatch(closeSindbar())} className="text-center mt-2 block w-full bg-black text-white p-3 rounded lg:w-40 transition duration-300 hover:bg-[#78b605]">        
             下一步
           </Link>
         </div>
