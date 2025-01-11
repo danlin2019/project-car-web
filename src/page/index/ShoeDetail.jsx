@@ -1,5 +1,4 @@
 import nike from "../../assets/n1-min.png";
-
 export function ShoeDetail() {
   return (
     <div className="flex flex-col lg:flex-row-reverse space-y-4 mt-5 dark:text-white">
@@ -9,25 +8,12 @@ export function ShoeDetail() {
         </div>
       </div>
       <div className="flex-1 space-y-6">
-        {/* Shoe text details */}
-        <div className="text-5xl font-black md:text-9xl">Nike Air max 270</div>
-        <div className="font-medium md:text-xl">
-          {
-            "The Nike Air Max 270 is a lifestyle shoe that's sure to turn heads with its vibrant color gradient."
-          }
-        </div>
-      
-        {/* Shoe buttons and links */}
+        <div className="text-5xl font-black lg:text-[6.8rem] leading-[3.5rem] lg:leading-[9rem]">滿足你的鞋櫃，從這裡開始</div>
+        <div className="font-medium md:text-xl">鞋履的藝術，走在舒適與風格的最前線。立即瀏覽新品鞋款，展現你的步履風采！</div>
         <div className="space-x-10">
           <button className="dark:bg-white dark:text-black isbutton h-14 w-44 bg-black text-white hover:bg-gray-900 active:bg-gray-700">
-            Add to bag
+            前往產品列表
           </button>
-          <a
-            href="#"
-            className="text-lg font-bold underline underline-offset-4"
-          >
-            View details
-          </a>
         </div>
       </div>
     </div>

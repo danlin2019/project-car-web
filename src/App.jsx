@@ -8,6 +8,7 @@ import { Sliderbar } from "./components/Sliderbar";
 import { Cart } from "./components/Cart";
 import { Dark } from "./components/Dark";
 import Notification from "./components/Notification";
+
 import "react-loading-skeleton/dist/skeleton.css";
 
 
@@ -19,7 +20,7 @@ export function App() {
   },[dispatch])
 
   return (
-    <div className="dark:bg-night p-2 xl:px-24 xl:py-10">
+    <div className="dark:bg-night p-2 xl:px-20 xl:py-10 min-h-[100vh]">
       <Notification/>
       <Nav/>
       <Outlet/>

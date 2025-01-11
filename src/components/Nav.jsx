@@ -1,6 +1,6 @@
 import { TbShoppingBag } from "react-icons/tb";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link ,useLocation} from "react-router-dom";
+import { Link ,useLocation,NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { openSindbar } from "../slice/uiSlice";
@@ -51,7 +51,7 @@ export function Nav() {
                 className={`rounded px-3 py-2 hover:bg-transparent hover:text-black`}
                 key={route.name}
               >
-                <Link to={`/${route.links}`} className={`${isActive ? 'text-[#78b605]' : 'text-black' }`}>{route.name}</Link>
+                <NavLink to={`/${route.links}`} className={`${isActive ? 'text-[#78b605]' : 'text-black' }`}>{route.name}</NavLink>
                
               </li>
             );

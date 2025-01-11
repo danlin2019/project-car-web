@@ -2,6 +2,7 @@ import axios from "axios";
 import { FiMinus } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import Skeleton from "react-loading-skeleton";
+import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../slice/messageSlice"
 import { addToCart } from "../slice/cartSlice";
@@ -59,6 +60,11 @@ const ProductDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`產品- ${productDeatil.title}`}</title>
+        <meta name="description" content="瀏覽產品詳細頁，發現您喜歡的商品！" />
+        <meta name="keywords" content="產品, 商品, 網路購物" />
+      </Helmet>
       {/* 顯示骨架屏 */}
       {!contentLoading && (
         <div className="flex flex-col lg:flex-row mt-16">

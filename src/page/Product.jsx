@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link,useLocation,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
 import { setMessage } from "../slice/messageSlice"
 import Skeleton from "react-loading-skeleton";
 import Pagination from "../components/Pagination";
@@ -19,13 +20,15 @@ const ProductPage = () => {
     totalProducts: 0,
   });
 
-  // 取得 query string 
+  // 取得 query string
   const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
+    // 取得 query 
     const params = new URLSearchParams(location.search)
     const listCurrentPage = Number(params.get('list')) || 1
+    console.log(listCurrentPage)
     getProducts(listCurrentPage)
   }, [location.search]);
 
@@ -63,7 +66,12 @@ const ProductPage = () => {
 
   return (
     <>
-   
+      {/* 使用 Helmet 設定 meta */}
+      <Helmet>
+        <title>產品列表</title>
+        <meta name="description" content="瀏覽產品列表，發現您喜歡的商品！" />
+        <meta name="keywords" content="產品, 商品, 網路購物" />
+      </Helmet>
       
       <div className="content-box">
         <h2 className="border-l-[5px] border-lime-200 pl-4 text-2xl font-bold mb-10">
@@ -72,21 +80,15 @@ const ProductPage = () => {
         {/* 顯示骨架屏 */}
         {!productLoading && (
           <ul className="flex flex-wrap">
-            {[...Array(8)].map((_, index) => (
+            {[...Array(10)].map((_, index) => (
               <li
                 key={index}
-                className="w-[50%] lg:w-[25%] px-2 mb-10 text-center text-xs"
+                className="w-[50%] lg:w-[25%] px-2 mb-10"
               >
-                <div className="">
-                  <Skeleton width="80%" height={100} />
-                </div>
-                <div>
-                  <span>
-                    <Skeleton width="60%" height={10} />
-                  </span>
-                </div>
-                <Skeleton width="80%" height={20} />
-                <Skeleton width="60%" height={20} />
+                <Skeleton width="80%" height={100} />
+                <Skeleton width="60%" height={10} />
+                <Skeleton width="80%" height={10} />
+                <Skeleton width="60%" height={10} />
               </li>
             ))}
           </ul>

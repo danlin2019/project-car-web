@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { setMessage } from "../slice/messageSlice"
 import { useDispatch } from "react-redux"
+import { Helmet } from "react-helmet";
 import Loading from "../components/Loading"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
@@ -78,18 +79,24 @@ const Form = () =>{
 
   return(
    <>
+    <Helmet>
+      <title>購物表單</title>
+      <meta name="description" content="購物表單" />
+      <meta name="keywords" content="產品, 商品, 網路購物" />
+    </Helmet>
+    {/* 送出資料loading */}
     <Loading isLoading={isLoading}/>
     <div className="content-box">
       <h2 className="text-2xl font-bold mb-5">填寫個人資訊</h2>
        <div className="flex flex-col items-baseline lg:flex-row justify-between">
-        <form className="w-full lg:w-[50%] mr-5" onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full lg:w-[50%] mb-8 lg:mr-5 lg:mb-0" onSubmit={handleSubmit(onSubmit)}>
             <FormField id="name" label="姓名" register={register} errors={errors} />
             <FormField id="email" label="Email" type="email" register={register} errors={errors} />
             <FormField id="phone" label="電話" type="tel" register={register} errors={errors} />
             <FormField id="address" label="寄送地址" register={register} errors={errors} />
-            <div className="flex mt-10">
-              <Link to="/Products" className="buy-btn mr-3">繼續購物</Link>
-              <button type='submit' className="buy-btn">送出表單</button>
+            <div className="flex mt-8 lg:mt-10">
+              <Link to="/Products" className="buy-btn mr-3 w-full">繼續購物</Link>
+              <button type='submit' className="buy-btn w-full">送出表單</button>
             </div>
         </form>
         <div className="w-full lg:w-[35%] border p-4 mb-4">
