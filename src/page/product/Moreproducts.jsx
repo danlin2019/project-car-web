@@ -2,22 +2,23 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Skeleton from "react-loading-skeleton";
+import { useParams } from "react-router-dom";
 
-
-export function NewArrivalsSection() {
-
+export function Moreproducts() {
+  const { id } = useParams()
   const [isproduct,setProduct] = useState([])
   const [productLoading, setProductLoading] = useState(false)
 
   useEffect(()=>{
     getProducts()
-  },[])
+  },[id])
 
   const getProducts = async () =>{
     setProductLoading(false)
     try {
       const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}allProducts`)
-      setProduct(res?.data?.products)
+      const shuffledProducts = res?.data?.products.sort(() => Math.random() - 0.5)
+      setProduct(shuffledProducts)
 
       setTimeout(()=>{
         setProductLoading(true)
@@ -31,8 +32,8 @@ export function NewArrivalsSection() {
   return (
     <div className="mt-20">
       <div className="flex-center flex-wrap">
-        <div className="bg-[url('./assets/lines.png')] bg-center text-4xl font-extrabold dark:text-white mb-10">
-          NEW ARRIVALS
+        <div className="text-3xl font-extrabold dark:text-white mb-10">
+          更多商品
         </div>
 
         {!productLoading && (
@@ -54,7 +55,7 @@ export function NewArrivalsSection() {
             {isproduct.slice(0,4).map((item,i)=>{
               return (
                 <li key={item.id} className="w-[50%] lg:w-[25%] px-2 mb-10">
-                  <Link to={`products/${item.id}`} className="group">
+                  <Link to={`/products/${item.id}`} className="group">
                     <div className="list-img relative w-full h-0 pb-[70%] mb-3">
                       <img src={item.imageUrl} alt={item.title} className="transition duration-[0.6s] group-hover:scale-[1.15]" />
                     </div>

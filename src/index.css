@@ -4,19 +4,84 @@
 
 @layer base {
   body {
-    font-family: 'Nunito Sans Variable', sans-serif;
+    font-family: "Noto Sans TC", serif;
   }
-  h1{
-    @apply text-center bg-indigo-800 text-white;
-    font-size: 100px;
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  input {
+    @apply w-full border rounded border-gray-400 p-[0.45rem] focus:outline-none  focus:border-blue-500;
   }
 }
 
-@layer utilities{
-  .flex-center{
-    @apply flex justify-center items-center
+@layer components {
+  .react-loading-skeleton {
+    @apply animate-skeleton;
+  }
+
+  .content-box {
+    @apply animate-fadeIn mt-16 m-auto w-[90%] max-w-[1024px] pb-10;
+  }
+  .arrw-btn {
+    @apply bg-slate-800 p-[0.625rem] text-white transition duration-300 hover:bg-gray-700 ;
+  }
+  .sumit-btn {
+    @apply bg-slate-800 text-white w-full py-2  transition duration-300 hover:bg-[#8dd304] dark:text-black dark:bg-white;
+  }
+  .buy-btn {
+    @apply dark:bg-white dark:text-black isbutton flex justify-center items-center h-12 w-40 bg-slate-800 text-white hover:opacity-70 active:bg-gray-700 dark:text-black dark:bg-white;
+  }
+}
+
+@layer utilities {
+  .nav {
+    @apply flex 
+      flex-col 
+      rounded-lg 
+      border 
+      border-gray-100 
+      bg-gray-50 
+      mt-3 
+      p-4
+      text-base
+      lg:flex-row 
+      lg:absolute 
+      lg:translate-x-2/4 
+      lg:left-[35%] lg:top-1 
+      lg:space-x-8 
+      lg:border-none 
+      lg:bg-transparent 
+      lg:mt-0 
+      lg:p-0;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
   }
   .isbutton {
-    @apply transition duration-300 active:scale-75
+    @apply transition duration-300 active:scale-75;
+  }
+  .buy-num {
+    @apply font-bold absolute -right-3 -top-6 bg-[#ee2e2e] text-white text-center inline-block  py-[3px] px-[10px] rounded-[99em];
+  }
+  .error {
+    @apply text-sm text-red-500 mt-1;
+  }
+
+  .list-img {
+    @apply relative h-0 overflow-hidden;
+  }
+  .list-img img {
+    @apply absolute w-full h-full object-cover;
+  }
+
+  .page-link.disabled {
+    @apply text-gray-300 pointer-events-none;
+  }
+  a.a-link {
+    @apply mr-2 rounded transition duration-300  px-[0.6rem] py-[0.1rem] text-black hover:opacity-75;
+  }
+
+  a.a-link.active {
+    @apply bg-[#8dd304] text-white;
   }
 }

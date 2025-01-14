@@ -1,15 +1,49 @@
 import { TbShoppingBag } from "react-icons/tb";
-import NikeLogo from "../assets/nike-logo.svg?react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useState } from "react";
-export function Nav({onClickOpen}) {
-  const ROUTES = ["Home", "About", "Service", "Pricing", "Contact"];
+import { Link ,useLocation,NavLink} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { openSindbar } from "../slice/uiSlice";
+import { useDispatch } from "react-redux";
+
+export function Nav() {
+
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const totalQuantity = useSelector((state => state.cart))
+
+  const [showCartMessage, setShowCartMessage] = useState(false)
+  const ROUTES = [
+    {
+      name:'Home',
+      links: '',
+      path: "/",
+    },
+    {
+      name:'products',
+      links: 'products',
+      path: "/products",
+    },
+  ];
+  useEffect(()=>{
+
+    if(totalQuantity?.addText){
+      if(totalQuantity.totalQuantity){
+        setShowCartMessage(true)
+        setTimeout(() => setShowCartMessage(false), 1500)
+      }
+    }
+
+  },[totalQuantity.totalQuantity])
   const [isMobileMenuShown, setiIsMobileMenuShown] = useState(false);
   return (
     <nav className="relative z-10 flex flex-wrap items-center justify-between dark:text-white">
-      <a href="">
-        <NikeLogo className="h-20 w-20" />
-      </a>
+      <Link to="/">
+        {/* 購物前台 */}
+        <div className="flex-center h-10 w-10 rounded-[99em] bg-black text-white text-xl dark:bg-white dark:text-black">
+            K
+        </div>
+      </Link>
       <button
         onClick={() => setiIsMobileMenuShown(!isMobileMenuShown)}
         className="lg:hidden rounded-lg p-2 hover:bg-gray-100 focus:bg-gray-50"
@@ -20,29 +54,43 @@ export function Nav({onClickOpen}) {
       <div
         className={`${!isMobileMenuShown && "hidden"} w-full lg:block lg:w-auto`}
       >
-        <ul className="lg:space-x-8 flex flex-col lg:flex-row rounded-lg border border-gray-100 lg: border-none lg:bg-transparent bg-gray-50 p-4 text-1">
+        <ul className="nav">
           {ROUTES.map((route, i) => {
+            const isActive =  route.path === "/"
+            ? location.pathname === route.path // Home 僅在路徑完全等於 "/" 時高亮
+            : location.pathname.startsWith(route.path); // Products 在其路徑和子路徑時高亮
             return (
               <li
-                className={`cursor-pointer rounded px-3 py-2 ${
-                  i === 0
-                    ? "bg-blue-500 text-white lg:bg-transparent lg:text-blue-500"
-                    : "hover:bg-gray-100"
-                } ${(i === 3 || i === 4) && "lg:text-white hover:bg-transparent hover:text-black"}`}
-                key={route}
+                className={`rounded px-3 py-2 hover:bg-transparent hover:text-black`}
+                key={route.name}
               >
-                {route}
+                <NavLink to={`/${route.links}`} className={`${isActive ? 'text-[#78b605]' : 'text-black dark:text-white' }`}>{route.name}</NavLink>
+               
               </li>
             );
           })}
         </ul>
       </div>
       {/* Car button */}
-      <div className="fixed bottom-4 left-4 lg:static dark:text-black" onClick={onClickOpen}>
-        <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
-          <TbShoppingBag />
-        </div>
-      </div>
+      {!['/cartdetail','/formDetail'].includes(location.pathname) && (
+        <>
+          {/* 提示框 */}
+          {showCartMessage && (
+            <div className="fixed bottom-4 left-20 lg:bottom-auto lg:top-14 lg:left-[auto] lg:right-20 z-20 bg-[#78b605] text-white py-2 px-4 rounded shadow-md">
+              已加入購物車！
+            </div>
+          )}        
+          <div className={`fixed bottom-4 left-4 lg:static dark:text-black`} onClick={()=>dispatch(openSindbar())}>
+            <div className="relative">
+              <div className="buy-num">{totalQuantity.items.length}</div>
+              <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
+                <TbShoppingBag />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
     </nav>
   );
 }

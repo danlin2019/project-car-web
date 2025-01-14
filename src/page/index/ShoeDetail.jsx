@@ -1,7 +1,5 @@
 import nike from "../../assets/n1-min.png";
-import { QTY,SIZES } from "../../constant";
-import { Select } from "../../components/Select";
-
+import { Link } from "react-router-dom";
 export function ShoeDetail() {
   return (
     <div className="flex flex-col lg:flex-row-reverse space-y-4 mt-5 dark:text-white">
@@ -11,29 +9,12 @@ export function ShoeDetail() {
         </div>
       </div>
       <div className="flex-1 space-y-6">
-        {/* Shoe text details */}
-        <div className="text-5xl font-black md:text-9xl">Nike Air max 270</div>
-        <div className="font-medium md:text-xl">
-          {
-            "The Nike Air Max 270 is a lifestyle shoe that's sure to turn heads with its vibrant color gradient."
-          }
-        </div>
-        <div className="flex space-x-6">
-          <div className="text-3xl font-extrabold md:text-6xl">100 $</div>
-          <Select title={'QTY'} options={QTY}/>
-          <Select title={'SIZES'} options={SIZES}/>
-        </div>
-        {/* Shoe buttons and links */}
+        <div className="text-5xl font-black lg:text-[6.8rem] leading-[3.5rem] lg:leading-[9rem]">滿足你的鞋櫃，從這裡開始</div>
+        <div className="font-medium md:text-xl">鞋履的藝術，走在舒適與風格的最前線。立即瀏覽新品鞋款，展現你的步履風采！</div>
         <div className="space-x-10">
-          <button className="dark:bg-white dark:text-black isbutton h-14 w-44 bg-black text-white hover:bg-gray-900 active:bg-gray-700">
-            Add to bag
-          </button>
-          <a
-            href="#"
-            className="text-lg font-bold underline underline-offset-4"
-          >
-            View details
-          </a>
+          <Link to='/products' className="flex justify-center items-center dark:bg-white dark:text-black isbutton h-14 w-44 bg-black text-white hover:bg-gray-600 active:bg-gray-700">
+            前往產品列表
+          </Link>
         </div>
       </div>
     </div>
