@@ -6,7 +6,8 @@ export const cartSlice = createSlice({
   initialState:{
     items:[], //儲存產品
     totalQuantity:0, // 購物車總數量
-    totalMoney:0 //產品總金額
+    totalMoney:0, //產品總金額
+    addText:false
   },
 
   reducers:{
@@ -14,10 +15,11 @@ export const cartSlice = createSlice({
     addToCart (state,action){
       const newItem = action.payload
       const existingItem = state.items.find((item) => item.id === newItem.id)
-
       // 如果已經有相同產品在購物車中，更新數量不更新商品
+      
       if(existingItem) { 
         existingItem.quantity = newItem.quantity
+        state.addText = false
       }else{
         // 如果是新加入產品 加入購物車
         state.items.push({
@@ -29,11 +31,14 @@ export const cartSlice = createSlice({
           title: newItem.title,
           quantity:newItem.quantity,
         })
+
       }
+
       // 更新總數量 & 總金額
       state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0)
       state.totalMoney = state.items.reduce((sum, item) => sum + item.price * item.quantity,0)
       localStorage.setItem('cart',JSON.stringify(state.items))
+      state.addText = true
     },
 
     // 取得Storag資料

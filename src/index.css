@@ -23,13 +23,13 @@
     @apply animate-fadeIn mt-16 m-auto w-[90%] max-w-[1024px] pb-10;
   }
   .arrw-btn {
-    @apply bg-slate-800 p-[0.625rem] text-white transition duration-300 hover:opacity-80;
+    @apply bg-slate-800 p-[0.625rem] text-white transition duration-300 hover:bg-gray-700 ;
   }
   .sumit-btn {
-    @apply bg-slate-800 text-white w-full py-2  transition duration-300 hover:opacity-90;
+    @apply bg-slate-800 text-white w-full py-2  transition duration-300 hover:bg-[#8dd304] dark:text-black dark:bg-white;
   }
   .buy-btn {
-    @apply dark:bg-white dark:text-black isbutton flex justify-center items-center h-12 w-40 bg-slate-800 text-white hover:opacity-70 active:bg-gray-700;
+    @apply dark:bg-white dark:text-black isbutton flex justify-center items-center h-12 w-40 bg-slate-800 text-white hover:opacity-70 active:bg-gray-700 dark:text-black dark:bg-white;
   }
 }
 
@@ -42,7 +42,7 @@
       border-gray-100 
       bg-gray-50 
       mt-3 
-      p-4 
+      p-4
       text-base
       lg:flex-row 
       lg:absolute 

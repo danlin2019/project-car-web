@@ -2,14 +2,17 @@ import { TbShoppingBag } from "react-icons/tb";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link ,useLocation,NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { openSindbar } from "../slice/uiSlice";
 import { useDispatch } from "react-redux";
+
 export function Nav() {
 
   const dispatch = useDispatch()
   const location = useLocation()
   const totalQuantity = useSelector((state => state.cart))
+
+  const [showCartMessage, setShowCartMessage] = useState(false)
   const ROUTES = [
     {
       name:'Home',
@@ -22,12 +25,22 @@ export function Nav() {
       path: "/products",
     },
   ];
+  useEffect(()=>{
+
+    if(totalQuantity?.addText){
+      if(totalQuantity.totalQuantity){
+        setShowCartMessage(true)
+        setTimeout(() => setShowCartMessage(false), 1500)
+      }
+    }
+
+  },[totalQuantity.totalQuantity])
   const [isMobileMenuShown, setiIsMobileMenuShown] = useState(false);
   return (
     <nav className="relative z-10 flex flex-wrap items-center justify-between dark:text-white">
       <Link to="/">
         {/* 購物前台 */}
-        <div className="flex-center h-10 w-10 rounded-[99em] bg-black text-white text-xl">
+        <div className="flex-center h-10 w-10 rounded-[99em] bg-black text-white text-xl dark:bg-white dark:text-black">
             K
         </div>
       </Link>
@@ -51,7 +64,7 @@ export function Nav() {
                 className={`rounded px-3 py-2 hover:bg-transparent hover:text-black`}
                 key={route.name}
               >
-                <NavLink to={`/${route.links}`} className={`${isActive ? 'text-[#78b605]' : 'text-black' }`}>{route.name}</NavLink>
+                <NavLink to={`/${route.links}`} className={`${isActive ? 'text-[#78b605]' : 'text-black dark:text-white' }`}>{route.name}</NavLink>
                
               </li>
             );
@@ -60,14 +73,22 @@ export function Nav() {
       </div>
       {/* Car button */}
       {!['/cartdetail','/formDetail'].includes(location.pathname) && (
-        <div className={`fixed bottom-4 left-4 lg:static dark:text-black`} onClick={()=>dispatch(openSindbar())}>
-          <div className="relative">
-            <div className="buy-num">{totalQuantity.items.length}</div>
-            <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
-              <TbShoppingBag />
+        <>
+          {/* 提示框 */}
+          {showCartMessage && (
+            <div className="fixed bottom-4 left-20 lg:bottom-auto lg:top-14 lg:left-[auto] lg:right-20 z-20 bg-[#78b605] text-white py-2 px-4 rounded shadow-md">
+              已加入購物車！
+            </div>
+          )}        
+          <div className={`fixed bottom-4 left-4 lg:static dark:text-black`} onClick={()=>dispatch(openSindbar())}>
+            <div className="relative">
+              <div className="buy-num">{totalQuantity.items.length}</div>
+              <div className="flex-center h-12 w-12 rounded-full bg-white shadow-md cursor-pointer">
+                <TbShoppingBag />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
     </nav>

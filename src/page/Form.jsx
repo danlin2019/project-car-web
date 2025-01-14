@@ -15,7 +15,7 @@ import * as Yup from "yup"
 // 表單元件
 const FormField = ({ id, label, type = "text", register, errors }) => (
   <div className="mb-4">
-    <label htmlFor={id} className="block mb-1">{label}</label>
+    <label htmlFor={id} className="block mb-1 dark:text-white">{label}</label>
     <input
       id={id}
       type={type}
@@ -49,18 +49,18 @@ const Form = () =>{
   } = useForm({
       resolver: yupResolver(schema)
   })
-
   const onSubmit = async (data) =>{
     setIsLoading(true)
    
     const submitData = {
       ...data,
-      items
+      totalMoney,
+      totalQuantity,
+      items,
+      time: new Date().getTime()
     }
-    console.log(submitData)
     try {
       const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}createOrder`,submitData)
-      console.log('res',res)
       const {success,message} = res.data
       setIsLoading(false)
       if(success){
@@ -87,7 +87,7 @@ const Form = () =>{
     {/* 送出資料loading */}
     <Loading isLoading={isLoading}/>
     <div className="content-box">
-      <h2 className="text-2xl font-bold mb-5">填寫個人資訊</h2>
+      <h2 className="text-2xl font-bold mb-5 dark:text-white">填寫個人資訊</h2>
        <div className="flex flex-col items-baseline lg:flex-row justify-between">
         <form className="w-full lg:w-[50%] mb-8 lg:mr-5 lg:mb-0" onSubmit={handleSubmit(onSubmit)}>
             <FormField id="name" label="姓名" register={register} errors={errors} />
@@ -99,13 +99,13 @@ const Form = () =>{
               <button type='submit' className="buy-btn w-full">送出表單</button>
             </div>
         </form>
-        <div className="w-full lg:w-[35%] border p-4 mb-4">
-            <h2 className="font-bold mb-3">商品詳細</h2>
+        <div className="w-full lg:w-[35%] border p-4 mb-4 dark:text-white">
+            <h2 className="font-bold mb-3 dark:text-white">商品詳細</h2>
             <ul>
               {items.map((item)=>{
                 return (
                   <li key={item.id} className="flex flex-wrap border-b pb-3 mb-3">
-                    <div className="relative w-[90px] h-[45px] overflow-hidden mr-3">
+                    <div className="relative w-[90px] h-[65px] overflow-hidden mr-3">
                       <img
                         className=" absolute w-full h-full top-0 object-cover"
                         src={item.imageUrl}
@@ -128,7 +128,7 @@ const Form = () =>{
               })}
             </ul>
             <div className="mt-6 text-xl">
-              總計 {totalQuantity} 件 $NT<span className="text-red-700 font-bold">{totalMoney}</span>
+              總計 {totalQuantity} 件 $NT <span className="text-red-700 font-bold">{totalMoney}</span>
             </div>
         </div>
        </div> 

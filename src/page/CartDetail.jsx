@@ -56,7 +56,7 @@ const CartDetail = () => {
                     to={`/products/${products.id}`}
                   >
                     {/* img */}
-                    <div className="relative w-[180px] h-[100px] overflow-hidden mr-3">
+                    <div className="relative w-[180px] h-[120px] overflow-hidden mr-3">
                       <img
                         className="absolute w-full h-full top-0 object-cover"
                         src={products.imageUrl}
@@ -115,7 +115,7 @@ const CartDetail = () => {
           </ul>
           <div className="mt-10 flex flex-col lg:flex-row justify-end items-center dark:text-white">
             <div className="lg:w-[30%]">
-              共計 <b className="text-[#3b3b3b] text-4xl">{totalQuantity}</b> 件
+              共計 <b className="text-[#3b3b3b] text-4xl dark:text-white">{totalQuantity}</b> 件
               <span className=" ml-2 text-red-600 font-bold text-2xl">
                 $NT ${total}
               </span>
@@ -124,7 +124,7 @@ const CartDetail = () => {
             <Link
               to="/formDetail"
               onClick={() => dispatch(closeSindbar())}
-              className="text-center mt-2 block w-full bg-black text-white p-3 rounded lg:w-40 transition duration-300 hover:bg-[#78b605]"
+              className="text-center mt-2 block w-full bg-black text-white p-3 rounded lg:w-40 transition duration-300 hover:bg-[#78b605] dark:bg-white dark:text-black"
             >
               下一步
             </Link>

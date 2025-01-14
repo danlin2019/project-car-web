@@ -28,7 +28,6 @@ const ProductPage = () => {
     // 取得 query 
     const params = new URLSearchParams(location.search)
     const listCurrentPage = Number(params.get('list')) || 1
-    console.log(listCurrentPage)
     getProducts(listCurrentPage)
   }, [location.search]);
 
@@ -95,7 +94,7 @@ const ProductPage = () => {
         )}
         {/* 列表 */}
         {productLoading && (
-          <ul className="flex flex-wrap">
+          <ul className="flex flex-wrap dark:text-white">
             {products &&
               products.map((item) => {
                 return (
