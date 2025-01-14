@@ -52,7 +52,6 @@ export const cartSlice = createSlice({
     },
     // 刪除購物車單筆資料
     delectCart(state,action){
-      console.log(action.payload)
       // 篩選出不符合的項目並重新賦值給 state.items
       state.items = state.items.filter((item) => item.id !== action.payload)
 

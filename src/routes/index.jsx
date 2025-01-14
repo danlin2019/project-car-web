@@ -34,5 +34,7 @@ const routers = [
   }
 ]
 
-const router = createBrowserRouter(routers)
+const router = createBrowserRouter(routers, {
+  basename: '/project-car-web/',
+})
 export default router
