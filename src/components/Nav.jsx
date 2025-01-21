@@ -72,7 +72,7 @@ export function Nav() {
         </ul>
       </div>
       {/* Car button */}
-      {!['/cartdetail','/formDetail'].includes(location.pathname) && (
+      {!['/cartdetail','/formdetail'].includes(location.pathname) && (
         <>
           {/* 提示框 */}
           {showCartMessage && (

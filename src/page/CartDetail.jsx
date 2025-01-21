@@ -122,7 +122,7 @@ const CartDetail = () => {
             </div>
 
             <Link
-              to="/formDetail"
+              to="/formdetail"
               onClick={() => dispatch(closeSindbar())}
               className="text-center mt-2 block w-full bg-black text-white p-3 rounded lg:w-40 transition duration-300 hover:bg-[#78b605] dark:bg-white dark:text-black"
             >

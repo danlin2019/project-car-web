@@ -4,7 +4,7 @@ import ProductPage from "../page/Product";
 import ProductDetail from "../page/ProductDetail";
 import CartDetail from "../page/CartDetail";
 import Form from "../page/form";
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 const routers = [
   {
     path:'/',
@@ -34,7 +34,5 @@ const routers = [
   }
 ]
 
-const router = createBrowserRouter(routers, {
-  basename: '/project-car-web/',
-})
+const router = createHashRouter(routers)
 export default router
